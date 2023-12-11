@@ -8,8 +8,10 @@ namespace Magazyn
 {
     class Menu
     {
+
         static void Main(string[] args)
         {
+
             bool exit = false;
             {
                 Console.WriteLine("| Wybierz jedną z opcji: |");
