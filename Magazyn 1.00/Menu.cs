@@ -72,6 +72,7 @@ namespace Magazyn
         static void DodawanieTowaru()
         {
             Console.WriteLine("Funkcja Dodawanie Towaru");
+
         }
 
         static void WprowadzanieDanychArtykulow()
