@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Magazyn_1._00.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Magazyn
 {
     class Menu
     {
+        public const int MAX_COMMANDS = 8;
 
         static void Main(string[] args)
         {
@@ -29,33 +31,41 @@ namespace Magazyn
 
                 int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice)
+                ICommand[] commands = new ICommand[MAX_COMMANDS];
+                commands[1] = new WysylkaProduktu();
+
+                if (commands[choice] != null )
                 {
-                    case 1:
-                        WysylkaProduktu();
-                        break;
-                    case 2:
-                        UsuwanieTowaru();
-                        break;
-                    case 3:
-                        DodawanieTowaru();
-                        break;
-                    case 4:
-                        WprowadzanieDanychArtykulow();
-                        break;
-                    case 5:
-                        WyswietlanieStanuMagazynowego();
-                        break;
-                    case 6:
-                        AktualizacjaTowaru();
-                        break;
-                    case 7:
-                        exit = true;
-                        break;
-                    default:
-                        Console.WriteLine("Nieprawidłowy wybór. Spróbuj ponownie.");
-                        break;
+                    commands[choice].Execute();
                 }
+
+                //switch (choice)
+                //{
+                //    case 1:
+                //        WysylkaProduktu();
+                //        break;
+                //    case 2:
+                //        UsuwanieTowaru();
+                //        break;
+                //    case 3:
+                //        DodawanieTowaru();
+                //        break;
+                //    case 4:
+                //        WprowadzanieDanychArtykulow();
+                //        break;
+                //    case 5:
+                //        WyswietlanieStanuMagazynowego();
+                //        break;
+                //    case 6:
+                //        AktualizacjaTowaru();
+                //        break;
+                //    case 7:
+                //        exit = true;
+                //        break;
+                //    default:
+                //        Console.WriteLine("Nieprawidłowy wybór. Spróbuj ponownie.");
+                //        break;
+                //}
             }
         }
 

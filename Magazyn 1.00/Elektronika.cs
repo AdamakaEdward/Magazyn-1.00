@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magazyn_1._00
 {
-    public class Elektronika : Paczka
+    internal class elektronika
     {
-        public string[] rodzaje =
-        {
-            "Komputer", "Smartfon", "telewizor", "Ekspres", "Piekarnik", "Lodówka"
-
-        };
-
     }
 }

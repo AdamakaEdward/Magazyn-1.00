@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magazyn_1._00
 {
-    abstract public class Paczka
+    internal class Class1
     {
-        private string nazwa;
-        private double waga;
-        private string opis = "";
-        //private double rozmiar ?
-
     }
 }
