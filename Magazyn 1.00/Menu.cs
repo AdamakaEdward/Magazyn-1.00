@@ -1,10 +1,5 @@
-﻿using Magazyn_1._00.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Magazyn.Commands;
+using System.Windows.Input;
 namespace Magazyn
 {
     class Menu
@@ -32,76 +27,16 @@ namespace Magazyn
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 ICommand[] commands = new ICommand[MAX_COMMANDS];
-                commands[1] = new WysylkaProduktu();
+                commands[5] = new Wyswietlanie();
+                commands[2] = new UsuwanieTowaru();
+                commands[3] = new DodawanieTowaru();
+                commands[1] = new WysylkaTowaru();
 
-                if (commands[choice] != null )
+                if (commands[choice] != null)
                 {
-                    commands[choice].Execute();
+                    commands[choice].Execute(null);
                 }
-
-                //switch (choice)
-                //{
-                //    case 1:
-                //        WysylkaProduktu();
-                //        break;
-                //    case 2:
-                //        UsuwanieTowaru();
-                //        break;
-                //    case 3:
-                //        DodawanieTowaru();
-                //        break;
-                //    case 4:
-                //        WprowadzanieDanychArtykulow();
-                //        break;
-                //    case 5:
-                //        WyswietlanieStanuMagazynowego();
-                //        break;
-                //    case 6:
-                //        AktualizacjaTowaru();
-                //        break;
-                //    case 7:
-                //        exit = true;
-                //        break;
-                //    default:
-                //        Console.WriteLine("Nieprawidłowy wybór. Spróbuj ponownie.");
-                //        break;
-                //}
             }
         }
-
-        static void WysylkaProduktu()
-        {
-            Console.WriteLine("Funkcja Wysyłka Produktu");
-        }
-
-        static void UsuwanieTowaru()
-        {
-            Console.WriteLine("Funkcja Usuwanie Towaru");
-        }
-
-        static void DodawanieTowaru()
-        {
-            Console.WriteLine("Funkcja Dodawanie Towaru");
-
-        }
-
-        static void WprowadzanieDanychArtykulow()
-        {
-            Console.WriteLine("Funkcja Wprowadzanie Danych Artykułów");
-        }
-
-        static void WyswietlanieStanuMagazynowego()
-        {
-            Console.WriteLine("Funkcja Wyświetlanie Stanu Magazynowego");
-        }
-
-        static void AktualizacjaTowaru()
-        {
-            Console.WriteLine("Funkcja Aktualizacja Towaru");
-        }
-
-        //test
-        //test2
     }
-
 }
