@@ -37,8 +37,8 @@ namespace Magazyn.Commands
     {
         private Dictionary<string, Artykul> _artykuly = new Dictionary<string, Artykul>();
 
-        private string _sciezkaPlikuOryginalnego = @"C:\Users\Public\TestFolder\WriteLines2.txt";
-        private string _sciezkaPlikuWysylki = @"C:\Users\Public\TestFolder\WriteLines3.txt";
+        private string _sciezkaPlikuOryginalnego = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt.txt";
+        private string _sciezkaPlikuWysylki = @"C:\Users\Adam\source\repos\Magazyn-1.00\wysylka.txt.txt";
 
         // Konstruktor klasy WysylkaTowaru, inicjalizuje artykuły na podstawie pliku
         public WysylkaTowaru()

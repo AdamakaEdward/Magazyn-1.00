@@ -13,7 +13,7 @@ namespace Magazyn
 
         public void Execute(object parameter)
         {
-            string filePath = @"C:\Users\Public\TestFolder\WriteLines2.txt";
+            string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
             if (!File.Exists(filePath))
             {
@@ -53,7 +53,7 @@ namespace Magazyn
                 }
             }
 
-            string wysylkaPath = @"C:\Users\Public\TestFolder\WriteLines3.txt";
+            string wysylkaPath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
             if (!File.Exists(wysylkaPath))
             {

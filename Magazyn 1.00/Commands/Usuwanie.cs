@@ -14,7 +14,7 @@ namespace Magazyn.Commands
 
         public void Execute(object parameter)
         {
-            string filePath = @"C:\Users\Public\TestFolder\WriteLines2.txt";
+            string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {

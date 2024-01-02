@@ -9,10 +9,10 @@ public class DodawanieTowaru : ICommand
 
     public void Execute(object parameter)
     {
-        string filePath = @"C:\Users\Public\TestFolder\WriteLines2.txt";
+        string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
         Console.WriteLine("Podaj nazwę towaru:");
-        string productName = Console.ReadLine().Replace(" ", "_");
+        string productName = Console.ReadLine().Replace(" ", "_").Replace(",", ".");
 
         Console.WriteLine("Podaj cenę towaru:");
         double price = Convert.ToDouble(Console.ReadLine());
@@ -26,7 +26,7 @@ public class DodawanieTowaru : ICommand
         Console.WriteLine("Podaj opis towaru:");
         string description = Console.ReadLine();
 
-        using (StreamWriter writer = new StreamWriter(filePath, true))
+        using (StreamWriter writer = new StreamWriter(filePath, append: true))
         {
             writer.WriteLine("{0},{1},{2},{3},{4}", productName, price, quantity, weight, description);
         }
@@ -55,7 +55,7 @@ public class DodawanieTowaruZOpisem : ICommand
     public void Execute(object parameter)
     {
         // Dodaj logikę dodawania opisu do pliku, nie dodawaj informacji o produkcie
-        string filePath = @"C:\Users\Public\TestFolder\WriteLines2.txt";
+        string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             writer.WriteLine("Opis: {0}", description);
