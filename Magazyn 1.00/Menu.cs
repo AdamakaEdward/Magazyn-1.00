@@ -29,6 +29,7 @@ namespace Magazyn
                     int choice = Convert.ToInt32(Console.ReadLine());
 
                     ICommand[] commands = new ICommand[MAX_COMMANDS];
+                    commands[6] = new EdycjaTowaru();
                     commands[5] = new Wyswietlanie();
                     commands[2] = new UsuwanieTowaru();
                     commands[3] = new DodawanieTowaru();
