@@ -156,7 +156,7 @@ namespace Magazyn.Commands
             if (!_artykuly.ContainsKey(nazwaArtykulu))
             {
                 Console.WriteLine($"Nieprawidłowy wybór artykułu: {nazwaArtykulu}");
-                Console.WriteLine("Podaj poprawną nazwę artykułu:");
+
                 nazwaArtykulu = WczytajTekstOdUzytkownika("Podaj poprawną nazwę artykułu:");
             }
 

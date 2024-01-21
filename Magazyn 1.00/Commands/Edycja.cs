@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Input;
 
 namespace Magazyn.Commands
 {
     internal class EdycjaTowaru : ICommand
     {
+        private readonly Wyswietlanie wyswietlanieCommand = new Wyswietlanie();
+
+
+
         public bool CanExecute(object parameter)
         {
             return true;
         }
+
         public void Execute(object parameter)
         {
+            // Wywołaj metodę Execute z Wyswietlanie przed rozpoczęciem edycji
+            wyswietlanieCommand.Execute(null);
+
             string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
             // Odczytaj wszystkie linie z pliku
@@ -60,8 +65,11 @@ namespace Magazyn.Commands
             {
                 Console.WriteLine("Nieprawidłowy numer linii.");
             }
+
+            // Wywołaj metodę Execute z Wyswietlanie po zakończeniu edycji
+            wyswietlanieCommand.Execute(null);
         }
+
         public event EventHandler CanExecuteChanged;
     }
-
 }

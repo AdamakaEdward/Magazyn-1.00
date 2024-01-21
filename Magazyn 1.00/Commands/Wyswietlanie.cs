@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Magazyn
 {
-    class Wyswietlanie : ICommand
+    public class Wyswietlanie : ICommand
     {
         public bool CanExecute(object parameter)
         {
@@ -53,7 +53,7 @@ namespace Magazyn
                 }
             }
 
-            string wysylkaPath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
+            string wysylkaPath = @"C:\Users\Adam\source\repos\Magazyn-1.00\wysylka.txt";
 
             if (!File.Exists(wysylkaPath))
             {

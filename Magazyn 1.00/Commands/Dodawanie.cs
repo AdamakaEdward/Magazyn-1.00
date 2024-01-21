@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.IO;
+using System.Windows.Input;
 
 public class DodawanieTowaru : ICommand
 {
@@ -11,18 +13,47 @@ public class DodawanieTowaru : ICommand
     {
         string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
-        Console.WriteLine("Podaj nazwę towaru:");
-        string productName = Console.ReadLine().Replace(" ", "_").Replace(",", ".");
+        string productName;
+        do
+        {
+            Console.WriteLine("Podaj nazwę towaru:");
+            productName = Console.ReadLine().Replace(" ", "_").Replace(",", ".");
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                Console.WriteLine("Nazwa nie może być pusta. Spróbuj ponownie.");
+            }
+        } while (string.IsNullOrWhiteSpace(productName));
 
-        Console.WriteLine("Podaj cenę towaru:");
-        double price = Convert.ToDouble(Console.ReadLine());
+        double price;
+        do
+        {
+            Console.WriteLine("Podaj cenę towaru:");
+            if (!double.TryParse(Console.ReadLine(), out price) || price <= 0)
+            {
+                Console.WriteLine("Nieprawidłowa cena. Cena musi być liczbą większą od zera. Spróbuj ponownie.");
+            }
+        } while (price <= 0);
 
-        Console.WriteLine("Podaj ilość towaru:");
-        int quantity = Convert.ToInt32(Console.ReadLine());
+        int quantity;
+        do
+        {
+            Console.WriteLine("Podaj ilość towaru:");
+            if (!int.TryParse(Console.ReadLine(), out quantity) || quantity <= 0)
+            {
+                Console.WriteLine("Nieprawidłowa ilość. Ilość musi być liczbą całkowitą większą od zera. Spróbuj ponownie.");
+            }
+        } while (quantity <= 0);
 
-        Console.WriteLine("Podaj wagę towaru:");
-        double weight = Convert.ToDouble(Console.ReadLine());
-
+        double weight;
+        do
+        {
+            Console.WriteLine("Podaj wagę towaru:");
+            if (!double.TryParse(Console.ReadLine(), out weight) || weight <= 0)
+            {
+                Console.WriteLine("Nieprawidłowa waga. Waga musi być liczbą większą od zera. Spróbuj ponownie.");
+            }
+        } while (weight <= 0);
+        // Sprawdź czy podano opis, jeśli nie, ustaw pusty opis
         Console.WriteLine("Podaj opis towaru:");
         string description = Console.ReadLine();
 
