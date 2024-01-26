@@ -110,7 +110,7 @@ namespace Magazyn.Commands
                     double waga = Convert.ToDouble(czesci[3]);
                     double cena = Convert.ToDouble(czesci[1]);
 
-                    _artykuly.Add(nazwaProduktu, new Produkty(nazwaProduktu, cena, waga, "elektronika"));
+                    _artykuly.Add(nazwaProduktu, new Produkty(nazwaProduktu, cena, waga, kategoria: "elektronika"));
                 }
             }
             catch (Exception ex)
@@ -232,7 +232,7 @@ namespace Magazyn.Commands
 
                         if (nowaIlosc < 0)
                         {
-                            Console.WriteLine($"Błąd: Próba wysłania większej ilości artykułu, niż dostępnej w magazynie ({nazwaArtykulu})");
+                            Console.WriteLine($"Uwaga: Próba wysłania większej ilości artykułu, niż dostępnej w magazynie ({nazwaArtykulu})");
                             continue;
                         }
 

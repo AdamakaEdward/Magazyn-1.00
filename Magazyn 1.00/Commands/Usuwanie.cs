@@ -25,7 +25,7 @@ namespace Magazyn.Commands
 
             File.WriteAllLines(filePath, lines.Where(line => !line.Contains(productName)));
 
-            Console.WriteLine("Towar został usunięty z pliku tekstowego.");
+            Console.WriteLine("Towar został usunięty z bazy.");
             Console.ReadLine();
         }
 

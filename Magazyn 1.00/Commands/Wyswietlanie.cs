@@ -38,12 +38,12 @@ namespace Magazyn
                         double weight = Convert.ToDouble(fields[3]);
 
                         Console.WriteLine("{0} - {1:C} - {2} szt. - {3} kg", productName, price, quantity, weight);
-
                         // Jeżeli istnieje pole opisu
                         if (fields.Length >= 5)
                         {
                             string description = fields[4];
                             Console.WriteLine("Opis: {0}", description);
+                            Console.WriteLine();
                         }
                     }
                     else
@@ -78,10 +78,10 @@ namespace Magazyn
 
                         Console.WriteLine("{0} - {1} szt. - Koszt wysyłki: {2:C}", productName, quantity, shippingCost);
                     }
-                    else
+                    /*else
                     {
                         Console.WriteLine("Błąd w formacie pliku: {0}", line);
-                    }
+                    }*/
                 }
             }
             Console.ReadLine();

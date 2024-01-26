@@ -13,6 +13,7 @@ public class DodawanieTowaru : ICommand
     {
         string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
 
+
         string productName;
         do
         {

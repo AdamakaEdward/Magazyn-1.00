@@ -18,19 +18,17 @@ namespace Magazyn
                     Console.WriteLine("| 1. Wysyłka produktu    |");
                     Console.WriteLine("| 2. Usuwanie towaru     |");
                     Console.WriteLine("| 3. Dodawanie towaru    |");
-                    Console.WriteLine("| 4. Wprowadzanie danych |");
-                    Console.WriteLine("|    artykułów           |");
-                    Console.WriteLine("| 5. Wyświetlanie stanu  |");
+                    Console.WriteLine("| 4. Wyświetlanie stanu  |");
                     Console.WriteLine("|    magazynowego        |");
-                    Console.WriteLine("| 6. Aktualizacja towaru |");
-                    Console.WriteLine("| 7. Zamknięcie programu |");
+                    Console.WriteLine("| 5. Aktualizacja towaru |");
+                    Console.WriteLine("| 6. Zamknięcie programu |");
                     Console.WriteLine("|------------------------|");
 
                     int choice = Convert.ToInt32(Console.ReadLine());
 
                     ICommand[] commands = new ICommand[MAX_COMMANDS];
-                    commands[6] = new EdycjaTowaru();
-                    commands[5] = new Wyswietlanie();
+                    commands[5] = new EdycjaTowaru();
+                    commands[4] = new Wyswietlanie();
                     commands[2] = new UsuwanieTowaru();
                     commands[3] = new DodawanieTowaru();
                     commands[1] = new WysylkaTowaru();
