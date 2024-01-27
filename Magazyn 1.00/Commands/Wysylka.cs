@@ -37,8 +37,8 @@ namespace Magazyn.Commands
     {
         private Dictionary<string, Artykul> _artykuly = new Dictionary<string, Artykul>();
 
-        private string _sciezkaPlikuOryginalnego = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
-        private string _sciezkaPlikuWysylki = @"C:\Users\Adam\source\repos\Magazyn-1.00\wysylka.txt";
+        private string _sciezkaPlikuOryginalnego = @"C:\Users\adam.bigdowski\source\repos\Magazyn11\stan.txt";
+        private string _sciezkaPlikuWysylki = @"C:\Users\adam.bigdowski\source\repos\Magazyn11\wysylka.txt";
 
         // Konstruktor klasy WysylkaTowaru, inicjalizuje artykuły na podstawie pliku
         public WysylkaTowaru()
@@ -47,21 +47,11 @@ namespace Magazyn.Commands
         }
 
         // Implementacja interfejsu ICommand
-
-        /// <summary>
-        /// Sprawdza, czy komenda może być wykonana.
-        /// </summary>
-        /// <param name="parameter">Parametr komendy (nieużywany).</param>
-        /// <returns>Zawsze zwraca true, co oznacza, że komenda może być wykonana.</returns>
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
-        /// <summary>
-        /// Wykonuje logikę związaną z wysyłką towaru.
-        /// </summary>
-        /// <param name="parameter">Parametr komendy (nieużywany).</param>
         public void Execute(object parameter)
         {
             Console.Clear();
@@ -82,9 +72,14 @@ namespace Magazyn.Commands
             double waga = wybraneArtykulyZIlosciami.Sum(kvp => _artykuly[kvp.Key].Waga * kvp.Value);
             double kosztWysylki = ObliczKosztWysylki(waga);
 
-            DodajWyslaneDoPlikuWysylki(wybraneArtykulyZIlosciami, kosztWysylki);
+            if (!ZmniejszIloscArtykulowWPlikuOryginalnym(wybraneArtykulyZIlosciami))
+            {
+                Console.WriteLine("Naciśnij Enter, aby kontynuować.");
+                Console.ReadLine();
+                return; // Jeżeli ilość artykułów jest nieprawidłowa, wróć do menu
+            }
 
-            ZmniejszIloscArtykulowWPlikuOryginalnym(wybraneArtykulyZIlosciami);
+            DodajWyslaneDoPlikuWysylki(wybraneArtykulyZIlosciami, kosztWysylki);
 
             Console.WriteLine($"Koszt wysyłki: {kosztWysylki} zł");
             Console.WriteLine("Artykuły zostały dodane do pliku tekstowego wraz z kosztem wysyłki.");
@@ -94,9 +89,6 @@ namespace Magazyn.Commands
 
         // Pozostałe metody
 
-        /// <summary>
-        /// Wczytuje artykuły z pliku do słownika _artykuly.
-        /// </summary>
         private void WczytajArtykulyZPliku()
         {
             try
@@ -110,7 +102,7 @@ namespace Magazyn.Commands
                     double waga = Convert.ToDouble(czesci[3]);
                     double cena = Convert.ToDouble(czesci[1]);
 
-                    _artykuly.Add(nazwaProduktu, new Produkty(nazwaProduktu, cena, waga, kategoria: "elektronika"));
+                    _artykuly.Add(nazwaProduktu, new Produkty(nazwaProduktu, cena, waga, "elektronika"));
                 }
             }
             catch (Exception ex)
@@ -119,9 +111,6 @@ namespace Magazyn.Commands
             }
         }
 
-        /// <summary>
-        /// Wyświetla opcje artykułów do wysłania.
-        /// </summary>
         private void WyswietlOpcjeArtykulow()
         {
             Console.WriteLine("Wybierz artykuły do wysłania (oddzielone przecinkami):");
@@ -132,11 +121,6 @@ namespace Magazyn.Commands
             }
         }
 
-        /// <summary>
-        /// Dodaje artykuł do słownika wybranych artykułów na podstawie interakcji z użytkownikiem.
-        /// </summary>
-        /// <param name="nazwaArtykulu">Nazwa artykułu podana przez użytkownika.</param>
-        /// <param name="wybraneArtykulyZIlosciami">Słownik z ilościami wybranych artykułów.</param>
         private void DodajArtykulZInterakcjiUzytkownika(string nazwaArtykulu, Dictionary<string, int> wybraneArtykulyZIlosciami)
         {
             nazwaArtykulu = SprawdzPoprawnoscWyboruArtykulu(nazwaArtykulu);
@@ -146,11 +130,6 @@ namespace Magazyn.Commands
             wybraneArtykulyZIlosciami.Add(nazwaArtykulu, ilosc);
         }
 
-        /// <summary>
-        /// Sprawdza poprawność wyboru artykułu podanego przez użytkownika.
-        /// </summary>
-        /// <param name="nazwaArtykulu">Nazwa artykułu podana przez użytkownika.</param>
-        /// <returns>Poprawiona nazwa artykułu.</returns>
         private string SprawdzPoprawnoscWyboruArtykulu(string nazwaArtykulu)
         {
             if (!_artykuly.ContainsKey(nazwaArtykulu))
@@ -163,11 +142,6 @@ namespace Magazyn.Commands
             return nazwaArtykulu;
         }
 
-        /// <summary>
-        /// Oblicza koszt wysyłki na podstawie wagi.
-        /// </summary>
-        /// <param name="waga">Waga artykułów.</param>
-        /// <returns>Koszt wysyłki.</returns>
         private double ObliczKosztWysylki(double waga)
         {
             if (waga <= 5)
@@ -184,11 +158,6 @@ namespace Magazyn.Commands
             }
         }
 
-        /// <summary>
-        /// Dodaje dane o wysłanych artykułach do pliku wysyłki.
-        /// </summary>
-        /// <param name="wybraneArtykulyZIlosciami">Słownik z ilościami wybranych artykułów.</param>
-        /// <param name="kosztWysylki">Koszt wysyłki.</param>
         private void DodajWyslaneDoPlikuWysylki(Dictionary<string, int> wybraneArtykulyZIlosciami, double kosztWysylki)
         {
             try
@@ -208,11 +177,7 @@ namespace Magazyn.Commands
             }
         }
 
-        /// <summary>
-        /// Aktualizuje ilość artykułów w magazynie po wysłaniu.
-        /// </summary>
-        /// <param name="wybraneArtykulyZIlosciami">Słownik z ilościami wybranych artykułów.</param>
-        private void ZmniejszIloscArtykulowWPlikuOryginalnym(Dictionary<string, int> wybraneArtykulyZIlosciami)
+        private bool ZmniejszIloscArtykulowWPlikuOryginalnym(Dictionary<string, int> wybraneArtykulyZIlosciami)
         {
             try
             {
@@ -232,8 +197,14 @@ namespace Magazyn.Commands
 
                         if (nowaIlosc < 0)
                         {
-                            Console.WriteLine($"Uwaga: Próba wysłania większej ilości artykułu, niż dostępnej w magazynie ({nazwaArtykulu})");
-                            continue;
+                            Console.WriteLine($"Błąd: Próba wysłania większej ilości artykułu, niż dostępnej w magazynie ({nazwaArtykulu})");
+
+                            int doZamowienia = Math.Abs(nowaIlosc);
+                            Console.WriteLine($"Aby zrealizować zamówienie, należy zamówić {doZamowienia} sztuk artykułu {nazwaArtykulu}.");
+
+                            Console.ReadLine();
+
+                            return false; // Jeżeli ilość artykułów jest nieprawidłowa, wróć do menu
                         }
 
                         czesci[2] = nowaIlosc.ToString();
@@ -242,29 +213,21 @@ namespace Magazyn.Commands
                 }
 
                 File.WriteAllLines(_sciezkaPlikuOryginalnego, linie);
+                return true; // Poprawnie zmniejszono ilość artykułów
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Błąd podczas zmniejszania ilości artykułów: {ex.Message}");
+                return false; // Jeżeli wystąpił błąd, wróć do menu
             }
         }
 
-        /// <summary>
-        /// Wyświetla prompt i wczytuje tekst od użytkownika.
-        /// </summary>
-        /// <param name="prompt">Komunikat do wyświetlenia użytkownikowi.</param>
-        /// <returns>Wczytany tekst od użytkownika.</returns>
         private string WczytajTekstOdUzytkownika(string prompt)
         {
             Console.WriteLine(prompt);
             return Console.ReadLine();
         }
 
-        /// <summary>
-        /// Wyświetla prompt i wczytuje liczbę całkowitą od użytkownika.
-        /// </summary>
-        /// <param name="prompt">Komunikat do wyświetlenia użytkownikowi.</param>
-        /// <returns>Wczytana liczba całkowita.</returns>
         private int WczytajLiczbeOdUzytkownika(string prompt)
         {
             int result;
@@ -285,7 +248,35 @@ namespace Magazyn.Commands
             return result;
         }
 
-        // Zdarzenie interfejsu ICommand
         public event EventHandler CanExecuteChanged;
     }
 }
+/*Klasy i Obiekty:
+
+Klasy Artykul oraz Produkty reprezentują abstrakcyjne pojęcia artykułu i produktu. Klasa Produkty dziedziczy po klasie Artykul, co jest przykładem hierarchii dziedziczenia.
+Obiekty artykułów są tworzone i zarządzane w klasie WysylkaTowaru.
+Hermetyzacja:
+
+Właściwości klasy Artykul (np. Nazwa, Waga, Cena) są oznaczone jako protected set, co oznacza, że są dostępne tylko wewnątrz samej klasy i klas dziedziczących, co zapewnia hermetyzację danych.
+Polimorfizm:
+
+Metoda Execute w klasie WysylkaTowaru używa polimorfizmu, ponieważ obsługuje różne rodzaje artykułów (dziedziczących po Artykul) w sposób jednolity.
+Interfejsy:
+
+Klasa WysylkaTowaru implementuje interfejs ICommand, co pozwala na użycie jej instancji jako polecenia, co jest często wykorzystywane w aplikacjach z interfejsem użytkownika.
+Dziedziczenie:
+
+Klasa Produkty dziedziczy po klasie Artykul, co jest przykładem dziedziczenia, umożliwiając współdzielenie cech ogólnych artykułów.
+Enkapsulacja:
+
+Dostęp do prywatnych pól, takich jak _artykuly, jest kontrolowany poprzez metody publiczne, co jest przykładem enkapsulacji.
+Zdarzenia:
+
+Zastosowanie zdarzenia CanExecuteChanged w klasie WysylkaTowaru umożliwia obsługę zmian, co jest charakterystyczne dla programowania obiektowego.
+Obsługa Błędów:
+
+Kod zawiera obsługę błędów, takie jak próba wysłania większej ilości artykułów niż dostępnych w magazynie, co jest zgodne z zasadami programowania obiektowego.
+Inicjalizacja Obiektów:
+
+Konstruktor klasy WysylkaTowaru inicjalizuje artykuły na podstawie pliku, co jest przykładem inicjalizacji obiektów.
+*/

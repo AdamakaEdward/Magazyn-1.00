@@ -11,7 +11,7 @@ public class DodawanieTowaru : ICommand
 
     public void Execute(object parameter)
     {
-        string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
+        string filePath = @"C:\Users\adam.bigdowski\source\repos\Magazyn11\stan.txt";
 
 
         string productName;
@@ -87,7 +87,7 @@ public class DodawanieTowaruZOpisem : ICommand
     public void Execute(object parameter)
     {
         // Dodaj logikę dodawania opisu do pliku, nie dodawaj informacji o produkcie
-        string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
+        string filePath = @"C:\Users\adam.bigdowski\source\repos\Magazyn11\stan.txt";
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             writer.WriteLine("Opis: {0}", description);

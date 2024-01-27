@@ -1,0 +1,1 @@
+telewizor,3300,1,5,samsung

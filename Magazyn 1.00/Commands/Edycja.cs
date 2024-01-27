@@ -20,7 +20,7 @@ namespace Magazyn.Commands
             // Wywołaj metodę Execute z Wyswietlanie przed rozpoczęciem edycji
             wyswietlanieCommand.Execute(null);
 
-            string filePath = @"C:\Users\Adam\source\repos\Magazyn-1.00\stan.txt";
+            string filePath = @"C:\Users\adam.bigdowski\source\repos\Magazyn11\stan.txt";
 
             // Odczytaj wszystkie linie z pliku
             string[] lines = File.ReadAllLines(filePath);
